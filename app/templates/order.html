@@ -1,0 +1,37 @@
+{% extends "playout.html"%}
+{% block content%}
+<table class="table table-striped "style="color: #fff;">
+  <thead>
+    <tr>
+      <th>produit</th>
+      <th>username</th>
+      <th>phone</th>
+      <th>contery</th>
+      <th>size</th>
+      <th>color</th>
+      <th>date</th>
+      <th>delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.product.content }}</td>
+      <td>{{ order.username }}</td>
+      <td>{{ order.phone }}</td>
+      <td>{{ order.country }}</td>
+      <td>{{ order.size }}</td>
+      <td>{{ order.color }}</td>
+      <td>{{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('app.delete_order', order_id=order.id) }}">
+          {{ form.hidden_tag() }}  <!-- لحماية CSRF -->
+          <button type="submit" class="btn btn-sm btn-danger">X</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content%}

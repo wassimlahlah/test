@@ -1,0 +1,14 @@
+# تجاهل مجلدات pycache
+__pycache__/
+*.pyc
+*.pyo
+
+# تجاهل virtual environment
+.venv/
+
+# تجاهل instance (لو كان فيها قاعدة بيانات محلية)
+instance/
+
+# تجاهل ملفات النظام
+.DS_Store
+Thumbs.db

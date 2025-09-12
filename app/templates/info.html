@@ -1,0 +1,156 @@
+{% extends "playout.html" %}
+{% block content %}
+<div class="box">
+  <div class="container p-5 w-75">
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Information Of Buy</legend>
+
+            <div class="row">
+                <div class="col-4 text-center">
+                    <img id="product-img" src="{{ url_for('static', filename='thumbnail/' ~ shop.thumbnail) }}" 
+                         alt="{{ shop.title }}" class="card-img-top rounded shadow" style="width: 60%; height: auto;">
+                    <h4 class="text-white mt-3">{{ shop.title }}</h4>
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col mb-3">
+                        {{ form.username.label(class="form-label fw-bold") }}
+                        {{ form.username(class="form-control shadow-sm", required=True) }}
+                        {% for error in form.username.errors %}
+                          <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col mb-3">
+                        {{ form.number.label(class="form-label fw-bold") }}
+                        {{ form.number(class="form-control shadow-sm") }}
+                        {% for error in form.number.errors %}
+                          <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                  </div> 
+
+                  <!-- اختيار اللون -->
+                  <div class="col mb-3">
+                   {{ form.color(class="form-control d-none", id="color-hidden", required=True) }}
+                   <label class="form-label fw-bold d-block">Choose Color</label>
+                   <div class="d-flex flex-wrap gap-2">
+                     {% for color in colors %}
+                       <input type="radio" id="color-{{ loop.index }}" name="color"
+                              value="{{ color }}" class="d-none">
+                          <label 
+                           for="color-{{ loop.index }}"
+                           class="color-circle c-{{ color|lower|replace(' ', '-') }} {% if color == 'white' %}white-color{% endif %}"
+                           data-color="{{ color }}"
+                           aria-label="{{ color }}"
+                         ></label>
+                     {% endfor %}
+                   </div>
+                   {% for error in form.color.errors %}
+                     <div class="text-danger small">{{ error }}</div>
+                   {% endfor %}
+                 </div> 
+
+                <div class="row">
+                  <div class="col-3 mb-3">
+                      <label class="form-label fw-bold">
+                          <i class="bi bi-geo-alt"></i> Country
+                      </label>
+                      {{ form.country(class="form-select shadow-sm", required=True) }}
+                      {% for error in form.country.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                      {% endfor %}
+                  </div>
+
+                 <!-- اختيار الحجم -->
+                  <div class="col-6 mb-3">
+                   {{ form.size(class="form-control d-none", id="size-hidden", required=True) }}
+                   <label class="form-label fw-bold d-block">Choose Size</label>
+                   <div class="d-flex gap-2 flex-wrap" id="size-options">
+                     {% for s in sizes %}
+                       <div class="size-box" data-size="{{ s }}">{{ s }}</div>
+                     {% endfor %}
+                   </div>
+                   {% for error in form.size.errors %}
+                     <div class="text-danger small">{{ error }}</div>
+                   {% endfor %}
+                  </div>
+                </div>        
+                 <div class="mt-4">
+                        {{ form.submit(class="btn btn-success w-100 py-2 shadow") }}
+                 </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+  </div>
+</div>
+
+<!-- ستايل الألوان -->
+<style>
+.color-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.2s, border 0.2s;
+}
+.color-circle:hover {
+  transform: scale(1.15);
+}
+.color-circle.active {
+  border: 3px solid #000;
+}
+.c-red { background: red; }
+.c-blue { background: blue; }
+.c-green { background: green; }
+.c-white { background: white; }
+
+/* باش الأبيض يبان */
+.white-color { border: 1px solid #000; }
+
+/* اختيار الحجم */
+.size-box {
+  border: 2px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+.size-box.active {
+  border: 2px solid #000;
+}
+</style>
+
+<!-- Bootstrap icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<script>
+    // للألوان
+const colorHidden = document.getElementById("color-hidden");
+const colorCircles = document.querySelectorAll(".color-circle");
+
+colorCircles.forEach(circle => {
+  circle.addEventListener("click", () => {
+    colorCircles.forEach(c => c.classList.remove("active"));
+    circle.classList.add("active");
+    colorHidden.value = circle.dataset.color;
+  });
+});
+
+// للأحجام
+const sizeHidden = document.getElementById("size-hidden");
+const sizeBoxes = document.querySelectorAll(".size-box");
+
+sizeBoxes.forEach(box => {
+  box.addEventListener("click", () => {
+    sizeBoxes.forEach(b => b.classList.remove("active"));
+    box.classList.add("active");
+    sizeHidden.value = box.dataset.size;
+  });
+});
+</script>
+
+{% endblock content %}

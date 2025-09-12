@@ -1,0 +1,80 @@
+{% extends "playout.html"%}
+{% block content%} 
+<div class="container w-75 p-4">
+  <nav>
+    <div class="nav nav-tabs custom-tabs" id="tablist">
+
+      <a class="link" href="/dashbored/profile">
+        <button class="{{ 'nav-link active' if active_tab == 'profile' else 'nav-link' }}"  
+                id="nav-profile-tab"
+                data-bs-toggle="tab" 
+                data-bs-target="#nav-profile" 
+                type="button" role="tab"
+                aria-controls="nav-profile" aria-selected="true">
+          <i class="bi bi-person-circle me-1"></i> Profile
+        </button>
+      </a>
+
+      <a class="link" href="/dashbored/new_shop">
+        <button class="{{ 'nav-link active' if active_tab == 'new_shop' else 'nav-link' }}"  
+                id="nav-newshop-tab"
+                data-bs-toggle="tab" 
+                data-bs-target="#nav-newshop" 
+                type="button" role="tab"
+                aria-controls="nav-newshop" aria-selected="true">
+          <i class="bi bi-bag-plus me-1"></i> New Shop
+        </button>
+      </a>
+
+      <a class="link" href="/dashbored/new_news">
+        <button class="{{ 'nav-link active' if active_tab == 'new_news' else 'nav-link' }}"  
+                id="nav-newnews-tab"
+                data-bs-toggle="tab" 
+                data-bs-target="#nav-newnews" 
+                type="button" role="tab"
+                aria-controls="nav-newnews" aria-selected="true">
+          <i class="bi bi-newspaper me-1"></i> New News
+        </button>
+      </a>
+
+      <a class="link" href="/dashbored/your_shops">
+        <button class="{{ 'nav-link active' if active_tab == 'your_shops' else 'nav-link' }}"  
+                id="nav-your_shops-tab"
+                data-bs-toggle="tab" 
+                data-bs-target="#nav-yourshops" 
+                type="button" role="tab"
+                aria-controls="nav-yourshops" aria-selected="true">
+          <i class="bi bi-shop me-1"></i> Your Shops
+        </button>
+      </a>
+      <a class="link" href="/dashbored/your_news">
+        <button class="{{ 'nav-link active' if active_tab == 'your_news' else 'nav-link' }}"  
+                id="nav-your_news-tab"
+                data-bs-toggle="tab" 
+                data-bs-target="#nav-your_news" 
+                type="button" role="tab"
+                aria-controls="nav-your_news" aria-selected="true">
+          <i class="bi bi-newspaper me-1"></i> Your News
+        </button>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- المحتوى -->
+  <div class="tab-content p-4 shadow-lg rounded-bottom transparent-box" id="nav-tabContent">
+      {% block profile %} {% endblock profile%}
+      {% block new_shop %} {% endblock new_shop %}
+      {% block new_news %} {% endblock new_news %}
+      {% block your_shops %} {% endblock your_shops%}
+      {% block your_news %} {% endblock your_news%}
+
+
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+
+{% endblock content%}

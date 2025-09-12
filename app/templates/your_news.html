@@ -1,0 +1,49 @@
+{% extends "dashbored.html" %}
+{% block your_news %}
+
+  <div class="container p-5 text-center">
+    {% if your_news %}
+      <div id="ahmed" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          
+          {% for item in your_news %}
+            <li data-target="#ahmed" data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+          {% endfor %}
+        </ol>
+
+        <div class="carousel-inner">
+          
+          {% for item in your_news %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+               <img
+                 src="{{ url_for('static', filename='thumbnail/' ~ item.thumbnail) }}"
+                 class="d-block mx-auto"
+                 style="width:400px; height:auto; object-fit:cover;"
+                 alt="{{ item.title or 'slide' }}">
+             
+               <!-- زر الحذف -->
+               <form method="POST" action="{{ url_for('app.delete_news', news_id=item.id) }}" style="position:absolute; top:10px; right:170px;">
+                   {{ form.hidden_tag() }}  <!-- مهم ل CSRF -->
+                   <button type="submit" class="btn btn-danger btn-sm">X</button>
+               </form>
+            </div>
+
+
+          {% endfor %}
+        </div>
+
+        <a class="carousel-control-prev" href="#ahmed" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#ahmed" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    
+    {% endif %}
+  </div>
+
+{% endblock your_news%}

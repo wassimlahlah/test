@@ -1,0 +1,25 @@
+{% extends "dashbored.html" %}
+{% block new_news %}
+
+<div class="{{ 'tab-pane show active fade p-3' if (active_tab|default('new_news')) == 'new_news' else 'tab-pane fade p-3' }}" id="nav-new_news"
+   aria-labelledby="nav-new_news-tab" role="tabpanel">
+    <form method="POST" action=/dashbored/new_news enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+         <legend class='border-bottom mb-2'>Create News</legend>
+          <div class="form-group">         
+          {{ form.thumbnail.label}}
+          {{ form.thumbnail(class='form-control-file')}}
+          {% if form.thumbnail.errors %}
+          {% for error in form.thumbnail.errors %}
+          <span class="text-danger">{{ error }}</span></br>
+          {% endfor %}
+          {% endif %}
+          </div>
+           <div class="col mt-3">
+          {{ form.submit(class='btn btn-success', type='submit') }}
+           </div>
+      
+    </form>
+</div>
+
+{% endblock new_news %}

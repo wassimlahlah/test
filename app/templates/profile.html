@@ -1,0 +1,73 @@
+{% extends "dashbored.html" %}
+{% block profile %}
+
+<div class="{{ 'tab-pane show active fade p-3' if (active_tab|default('profile')) == 'profile' else 'tab-pane fade p-3' }}" id="nav-profile"
+   aria-labelledby="nav-profile-tab" role="tabpanel">
+    <form method="POST" action="/dashbored/profile" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+         <legend class='border-bottom mb-2'>Personal Information</legend>
+
+           <div class="row mb-2 justify-content-between">
+             
+            <img class="rounded-circle user-img " src="{{image}}" alt=""
+            style="height: 100px; width: auto; margin-left: 150px ; margin-top: 30px;">
+            
+            <div class="w-50">
+            <div class="col ">
+              <label for="fname" class="form-label">First Name</label>
+              <input class="form-control" type="text" value="{{ current_user.fname}}" readonly>
+
+              <label for="lname" class="form-label">Last Name</label>
+              <input class="form-control" type="text" value="{{ current_user.lname}}" readonly>
+            </div>
+            </div>
+           </div>          
+       <div class="row">
+      <div class="col ">
+        {{ form.username.label(class="mb-0") if form.username is defined }}
+        {{ form.username(class="form-control") if form.username is defined }}
+        {% if form.username is defined %}
+          {% for e in form.username.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="col ">
+        {{ form.number.label(class="mb-0") if form.number is defined }}
+        {{ form.number(class="form-control") if form.number is defined }}
+        {% if form.number is defined %}
+          {% for e in form.number.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+        {% endif %}
+      </div>
+       </div>
+
+      <div class="form-group mt-2">
+        {{ form.email.label(class="mb-0") if form.email is defined }}
+        {{ form.email(class="form-control") if form.email is defined }}
+        {% if form.email is defined %}
+          {% for e in form.email.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
+        {% endif %}
+      </div>
+
+      
+      <div class="row">
+        <div class="col">
+      <div class="form-group mb-2">
+          {{ form.image.label}}
+          {{ form.image(class='form-control-file')}}
+          {% if form.image.errors %}
+          {% for error in form.image.errors %}
+          <span class="text-danger">{{ error }}</span></br>
+          {% endfor %}
+          {% endif %}
+      </div>   
+      </div>   
+      <div class="col ">
+        <button class="btn btn-success" style="margin:20px 60px;" type="submit">Update</button>
+      </div>
+      </div>
+     
+      
+    </form>
+</div>
+
+{% endblock profile %}

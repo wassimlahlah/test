@@ -1,0 +1,219 @@
+body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+.home ,.shop{
+        height: 100vh;
+        background-image: url(istockphoto-466367844-612x612.jpg);
+        background-position: center;
+        background-size: cover;
+        align-items: center;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+        
+        
+    }
+
+ 
+a.nav-link {
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+a.nav-link:hover,
+.fas:hover {
+    color: #35ee4d !important; /* أضف !important */
+}
+
+a.nav-link.active {
+    color: #35ee4d !important;
+}
+
+span{
+    color: #111
+}
+.box{
+    height: 100%;
+    background: #1111117c;
+}
+.card{
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    transition: .5s;
+    margin: 5px;
+
+}
+.card:hover,.btn:hover{
+    transform: scale(1.1);
+    color: #fff;
+}
+.btn{
+    font-size: 1.1rem;
+    font-weight: 400;
+    background: #222;
+    color:#fff;
+}
+.css{ 
+    position: fixed;
+    z-index: 1;
+}
+.link{
+    text-decoration: none;
+}
+.pagination .page-link.pistachio-btn {
+    background-color: #93c572; /* أخضر بيستاش */
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s ease;
+  }
+
+  /* hover */
+  .pagination .page-link.pistachio-btn:hover {
+    background-color: #7bb157;
+    color: #fff;
+  }
+
+  /* active */
+  .pagination .active .page-link.pistachio-btn {
+    background-color: #000 !important; /* أسود */
+    color: #fff !important;
+    border-color: #000 !important;
+  }
+
+  /* disabled */
+  .pagination .page-item.disabled .page-link {
+    background-color: #e9ecef;
+    color: #6c757d;
+  }
+  .custom-tabs {
+  border-bottom: none !important; /* نزع السطر تحت */
+  --bs-nav-tabs-link-active-border-color: transparent !important; /* نزع border bootstrap */
+}
+
+.custom-tabs .nav-link {
+  background-color: #93c572; /* أخضر بيستاش */
+  color: #fff;
+  margin-right: 5px;
+  border-radius: 10px 10px 0 0;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none !important; /* نزع أي border */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.custom-tabs .nav-link:hover {
+  background-color: #7bb157;
+  color: #fff;
+}
+
+.custom-tabs .nav-link.active {
+  background-color: #000 !important; /* أسود */
+  color: #fff !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* نزع السطر الأزرق عند التركيز */
+.custom-tabs .nav-link:focus,
+.custom-tabs .nav-link:active,
+.custom-tabs .nav-link:focus-visible {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* شفاف بدون خلفية بيضاء */
+.transparent-box {
+  background-color: transparent !important;
+  min-height: 300px;
+}
+/* ننحي underline من الروابط */
+a.link {
+  text-decoration: none !important;
+}
+
+a.link:hover,
+a.link:focus,
+a.link:active {
+  text-decoration: none !important;
+}
+
+.color-input {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* الشكل العام للدائرة */
+.color-circle {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+
+/* تأثير hover */
+.color-circle:hover {
+  transform: scale(1.08);
+}
+
+/* تمييز عند الاختيار: نستخدم selector input:checked + label */
+.color-input:checked + .color-circle {
+  box-shadow: 0 0 0 3px rgb(0, 0, 0); /* حدود ظاهرة */
+  transform: scale(1.12);
+  border-color: rgba(0, 0, 0, 0.979);
+}
+
+/* خرائط الألوان (استبدل القيم بالهيكس اللي تحب) */
+.c-black  { background-color: #000000; }
+.c-white  { background-color: #ffffff; border: 1px solid #d0d0d0; } /* أبيض يحتاج إطار */
+.c-blue   { background-color: #0d6efd; }
+.c-red    { background-color: #dc3545; }
+.c-green  { background-color: #28a745; }
+.c-gray   { background-color: #6c757d; }
+
+/* إخفاء الـ input */
+.size-input {
+  position: absolute;
+  left: -9999px;
+}
+
+/* الصندوق العادي */
+.size-box {
+  background: #000000;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 6px;
+  border: 2px solid #f7f7f7;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+/* hover */
+.size-box:hover {
+  transform: scale(1.05);
+  border-color: #000000;
+}
+
+/* عندما يكون الـ checkbox مختار */
+.size-input:checked + .size-box {
+  border: 3px solid #000;
+
+}

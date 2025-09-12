@@ -1,0 +1,71 @@
+{% extends "playout.html" %}
+{% block content%}
+     
+     <div class="container p-5 w-75">
+    <form method="POST" action="" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+         <legend class='border-bottom mb-2'>update Shop</legend>
+         <div class="mb-3">
+            {{form.title.label(class='form-control-label')}}
+            {% if form.title.errors %}
+            {{form.title(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+             {{form.title(class='form-control')}}
+            {% endif%}
+         </div>
+
+         <div class="mb-3">
+            {{form.content.label(class='form-control-label')}}
+            {% if form.content.errors %}
+            {{form.content(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.content.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+             {{form.content(class='form-control')}}
+            {% endif%}
+         </div>
+         <div class="mb-3">
+            {{form.prix.label(class='form-control-label')}}
+            {% if form.prix.errors %}
+            {{form.prix(class='form-control is-invalid')}}
+            <div class="invalid-feedback">
+                {% for error in form.prix.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+             {{form.prix(class='form-control')}}
+            {% endif%}
+         </div>
+       <div class="row">
+         <div class="col">
+            {{ form.thumbnail.label}}
+          {{ form.thumbnail(class='form-control-file')}}
+          {% if form.thumbnail.errors %}
+          {% for error in form.thumbnail.errors %}
+          <span class="text-danger">{{ error }}</span></br>
+          {% endfor %}
+          {% endif %}
+         </div>
+
+         <div class="col mt-3 ">
+            {{form.submit(class='btn btn-success')}}
+         </div>
+        </div>
+       
+           
+      
+    </form>
+</div>
+
+
+
+{% endblock content%}

@@ -1,0 +1,147 @@
+{% extends "dashbored.html" %}
+{% block new_shop %}
+
+<div class="tab-pane show active fade p-3" id="nav-new_shop">
+    <form method="POST" action="{{ url_for('app.new_shop') }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <legend class='border-bottom mb-2'>Create Shops</legend>
+         <div class="row">  
+        <!-- Title -->
+        <div class="col mb-4">{{ form.title.label(class='form-label') }}{{ form.title(class='form-control') }}</div>
+
+        <!-- Content -->
+        <div class="col mb-4">{{ form.content.label(class='form-label') }}{{ form.content(class='form-control') }}</div>
+
+        <!-- Price -->
+        <div class="col mb-4">{{ form.prix.label(class='form-label') }}{{ form.prix(class='form-control') }}</div>
+         </div>
+        <!-- Colors -->
+         <div class="row">
+          <div class="col-4 mb-2">
+            <label class="form-label d-block">Available Colors</label>
+            <div class="d-flex gap-2 flex-wrap">
+                {% for c in color %}
+                    <input type="checkbox" id="color-{{ loop.index }}" name="available_colors" value="{{ c }}" class="color-checkbox">
+                    <label for="color-{{ loop.index }}" class="color-circle bg-{{ c|lower }}"></label>
+                {% endfor %}
+            </div>
+          </div>
+            <!-- Category -->
+            <div class="col-2 mb-2">{{ form.category.label(class='form-label') }}{{ form.category(class='form-select', id='category-select') }}</div>
+
+            <!-- Sizes -->
+            <div class="col-5 mb-2">
+                <label class="form-label d-block">Available Sizes</label>
+                <div class="d-flex gap-2 flex-wrap" id="sizes-container">
+                    {% for s in size %}
+                        <input type="checkbox" id="size-{{ s }}" name="available_sizes" value="{{ s }}" class="size-checkbox">
+                        <label for="size-{{ s }}" class="size-box">{{ s }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <!-- Thumbnail & Submit -->
+        <div class="col mb-2">{{ form.thumbnail.label }}{{ form.thumbnail(class='form-control-file') }}</div>
+        <div class="col mt-4" style="margin-left: 200px; ;">{{ form.submit(class='btn btn-success') }}</div>
+        </div>    
+    </form>
+</div>
+
+<style>
+/* دوائر الألوان */
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    transition: transform 0.2s, border 0.2s, opacity 0.2s;
+}
+.color-circle:hover {
+    transform: scale(1.2);
+    border: 2px solid #333;
+}
+
+/* إخفاء checkboxes الفعلية */
+.color-checkbox {
+    display: none;
+}
+
+/* عند اختيار اللون */
+.color-checkbox:checked + .color-circle {
+    border: 3px solid #000;
+    opacity: 0.7;
+}
+
+/* مربعات الأحجام */
+.size-box {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, border 0.2s;
+}
+.size-box:hover {
+    border-color: #333;
+    background-color: #f0f0f0;
+}
+
+/* إخفاء checkboxes الحجم */
+.size-checkbox {
+    display: none;
+}
+
+/* عند اختيار الحجم */
+.size-checkbox:checked + .size-box {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+.bg-red { background-color: red; }
+.bg-blue { background-color: blue; }
+.bg-green { background-color: green; }
+.bg-black { background-color: black; }
+.bg-white { background-color: white; }
+
+/* وهكذا لباقي الألوان */
+
+</style>
+
+<script>
+const categorySelect = document.getElementById('category-select');
+const sizesContainer = document.getElementById('sizes-container');
+
+const sizesByCategory = {
+    'clothing': ["S","M","L","XL"],
+    'shoes': ["36","37","38","39","40","41","42"]
+};
+
+categorySelect.addEventListener('change', function() {
+    const selectedCategory = this.value;
+    sizesContainer.innerHTML = '';
+    sizesByCategory[selectedCategory].forEach(size => {
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.id = 'size-' + size;
+        input.name = 'available_sizes';
+        input.value = size;
+        input.className = 'size-checkbox';
+
+        const label = document.createElement('label');
+        label.htmlFor = 'size-' + size;
+        label.className = 'size-box';
+        label.innerText = size;
+
+        sizesContainer.appendChild(input);
+        sizesContainer.appendChild(label);
+    });
+});
+</script>
+
+{% endblock new_shop %}
